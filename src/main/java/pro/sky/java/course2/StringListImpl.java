@@ -1,13 +1,15 @@
 package pro.sky.java.course2;
 
 import pro.sky.java.course2.exceptions.ArrayIsFullException;
+import pro.sky.java.course2.exceptions.ElementNotFoundException;
 import pro.sky.java.course2.exceptions.InvalidIndexException;
 import pro.sky.java.course2.exceptions.ItemIsNullException;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
     public class StringListImpl implements StringList{
-        private final String[] strings;
+        private String[] strings;
 
         private int size;
 
@@ -16,8 +18,18 @@ import java.util.Arrays;
         }
 
         public StringListImpl(int initSize) {
-            strings =new String[10];
+            strings =new String[initSize];
         }
+
+        public StringListImpl(String... args) {
+
+            this.strings = new String[5];
+            System.arraycopy(args, 0, strings, 0, args.length);
+            size=args.length;
+        }
+
+
+
 
 
         @Override
@@ -35,16 +47,17 @@ import java.util.Arrays;
             checkIndex(index);
             checkSize();
 
-            if (index == size) {
-                strings[size++] = item;
+            if (index == size-1) {
+                strings[index] = item;
                 return item;
             }
 
             System.arraycopy(strings, index, strings, index + 1, size - index);
+
             strings[index] = item;
             size++;
 
-            return null;
+            return item;
         }
 
         @Override
@@ -57,12 +70,24 @@ import java.util.Arrays;
 
         @Override
         public String remove(String item) {
-            return null;
+            checkItem(item);
+            int index = indexOf(item);
+            if (index == -1) {
+                throw new ElementNotFoundException();
+            }
+
+            return remove(index);
         }
 
         @Override
         public String remove(int index) {
-            return null;
+            checkIndex(index);
+            String item = strings[index];
+            if (index != size-1) {
+                System.arraycopy(strings, index+1, strings, index, size-index-1);
+            }
+            size--;
+            return item;
         }
 
         @Override
@@ -86,7 +111,7 @@ import java.util.Arrays;
         @Override
         public int lastIndexOf(String item) {
             checkItem(item);
-            for (int i = size; i > 0; i--) {
+            for (int i = size-1; i > 0; i--) {
                 if (strings[i].equals(item)) {
                     return i;
                 }
@@ -102,6 +127,10 @@ import java.util.Arrays;
 
         @Override
         public boolean equals(StringList otherList) {
+            if (otherList == null) {
+
+                throw new ItemIsNullException();
+            }
             return Arrays.equals(this.toArray(), otherList.toArray());
         }
 
@@ -117,7 +146,10 @@ import java.util.Arrays;
 
         @Override
         public void clear() {
-            size = 0;
+            for (int i = size-1; i >=0; i--) {
+                remove(i);
+
+            }
 
         }
 
@@ -139,7 +171,7 @@ import java.util.Arrays;
         }
 
         private void checkIndex(int index) {
-            if (index < 0 || index > size) {
+            if (index < 0 || index > size-1) {
                 throw new InvalidIndexException();
             }
         }
