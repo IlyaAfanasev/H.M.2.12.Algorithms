@@ -9,10 +9,8 @@ import pro.sky.java.course2.exceptions.InvalidIndexException;
 import pro.sky.java.course2.exceptions.ItemIsNullException;
 
 
-import java.util.Arrays;
-
 import static org.junit.jupiter.api.Assertions.*;
-import static pro.sky.java.course2.constant.StringListImplConstants.*;
+import static pro.sky.java.course2.constant.ListImplConstants.*;
 
 public class StringListImplTest {
 
