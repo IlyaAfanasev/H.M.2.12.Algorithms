@@ -2,6 +2,7 @@ package pro.sky.java.course2;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import pro.sky.java.course2.exceptions.ArrayIsFullException;
 import pro.sky.java.course2.exceptions.ElementNotFoundException;
 import pro.sky.java.course2.exceptions.InvalidIndexException;
 import pro.sky.java.course2.exceptions.ItemIsNullException;
@@ -24,13 +25,24 @@ public class IntegerListImplTest {
     }
 
     @Test
+    public void shouldRThrowArrayIsFullException() {
+        out.add(INTEGER_1);
+        out.add(INTEGER_2);
+        out.add(INTEGER_3);
+        out.add(INTEGER_4);
+        out.add(INTEGER_5);
+        Assertions.assertThrows(ArrayIsFullException.class, () -> out.add(INTEGER_2));
+    }
+    @Test
     public void shouldReturnCorrectResultFromMethodAddTestWithIndex() {
         out.add(INTEGER_1);
         out.add(INTEGER_2);
         out.add(INTEGER_3);
         Integer actual = out.add(1, INTEGER_4);
         assertEquals(INTEGER_4, actual);
+
     }
+
     @Test
     public void shouldReturnCorrectResultFromMethodAddTestWithIndexWhenIndexIsSizeMinus1() {
         out.add(INTEGER_1);
@@ -159,7 +171,9 @@ public class IntegerListImplTest {
         out.add(INTEGER_1);
         out.add(INTEGER_2);
         out.add(INTEGER_2);
+
         assertEquals(1, out.indexOf(INTEGER_2));
+
     }
 
     @Test
@@ -171,7 +185,7 @@ public class IntegerListImplTest {
     }
 
     @Test
-    public void shouldThrowItemIsNullExceptionFromMethodIndexOfWhenElement() {
+    public void shouldThrowItemIsNullExceptionFromMethodIndexOf() {
         out.add(INTEGER_1);
         out.add(INTEGER_2);
         out.add(INTEGER_3);
@@ -285,3 +299,5 @@ public class IntegerListImplTest {
         assertArrayEquals(INTEGERS_ARRAY, out.toArray());
     }
 }
+
+

@@ -13,7 +13,7 @@ public class IntegerListImpl implements IntegerList {
     private int size;
 
     public IntegerListImpl() {
-        integers =new Integer[10];
+        integers =new Integer[5];
     }
 
     public IntegerListImpl(int initSize) {
@@ -99,7 +99,7 @@ public class IntegerListImpl implements IntegerList {
         checkItem(item);
         sortInsertion();
             int min = 0;
-            int max = integers.length - 1;
+            int max = size - 1;
 
             while (min <= max) {
                 int mid = (min + max) / 2;
@@ -168,7 +168,7 @@ public class IntegerListImpl implements IntegerList {
     }
 
     private void sortInsertion() {
-        for (int i = 1; i < integers.length; i++) {
+        for (int i = 1; i < size; i++) {
             int temp = integers[i];
             int j = i;
             while (j > 0 && integers[j - 1] >= temp) {
@@ -177,6 +177,7 @@ public class IntegerListImpl implements IntegerList {
             }
             integers[j] = temp;
         }
+
     }
 
     private void checkItem(Integer item) {

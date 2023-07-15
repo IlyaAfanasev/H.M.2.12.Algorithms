@@ -5,27 +5,26 @@ import java.util.Random;
 
 public class Main {
     public static void main(String[] args) {
-
-        Integer [] arrayList1 = generateRandomArray();
-        Integer [] arrayList2 = generateRandomArray();
-        Integer [] arrayList3 = generateRandomArray();
-
-
-
-        long startArrays1 = System.currentTimeMillis();
-        sortInsertion(arrayList1);
-        System.out.println(System.currentTimeMillis() - startArrays1);
-
-
-        long startArrays2 = System.currentTimeMillis();
-        sortSelection(arrayList2);
-        System.out.println(System.currentTimeMillis() - startArrays2);
-
-
-        long startArrays3 = System.currentTimeMillis();
-        sortBubble(arrayList3);
-        System.out.println(System.currentTimeMillis() - startArrays3);
-
+//
+//        Integer [] arrayList1 = generateRandomArray();
+//        Integer [] arrayList2 = generateRandomArray();
+//        Integer [] arrayList3 = generateRandomArray();
+//
+//
+//
+//        long startArrays1 = System.currentTimeMillis();
+//        sortInsertion(arrayList1);
+//        System.out.println(System.currentTimeMillis() - startArrays1);
+//
+//
+//        long startArrays2 = System.currentTimeMillis();
+//        sortSelection(arrayList2);
+//        System.out.println(System.currentTimeMillis() - startArrays2);
+//
+//
+//        long startArrays3 = System.currentTimeMillis();
+//        sortBubble(arrayList3);
+//        System.out.println(System.currentTimeMillis() - startArrays3);
 
 
 
