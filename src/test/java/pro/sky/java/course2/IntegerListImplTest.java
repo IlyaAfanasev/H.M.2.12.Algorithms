@@ -25,13 +25,18 @@ public class IntegerListImplTest {
     }
 
     @Test
-    public void shouldRThrowArrayIsFullException() {
+    public void shouldReturnCorrectResultFromMethodAddWhenArrayIsFull() {
         out.add(INTEGER_1);
         out.add(INTEGER_2);
         out.add(INTEGER_3);
         out.add(INTEGER_4);
         out.add(INTEGER_5);
-        Assertions.assertThrows(ArrayIsFullException.class, () -> out.add(INTEGER_2));
+        out.add(INTEGER_5);
+
+        assertEquals(6,out.size());
+
+
+
     }
     @Test
     public void shouldReturnCorrectResultFromMethodAddTestWithIndex() {
@@ -246,7 +251,7 @@ public class IntegerListImplTest {
         out.add(INTEGER_2);
         out.add(INTEGER_3);
         out.add(INTEGER_4);
-        out.add(INTEGER_5);
+
 
         assertTrue(out.equals(OTHER_INTEGER_LIST));
 
@@ -258,7 +263,7 @@ public class IntegerListImplTest {
         out.add(INTEGER_2);
         out.add(INTEGER_3);
         out.add(INTEGER_4);
-        out.add(INTEGER_5);
+
         assertThrows(ItemIsNullException.class, () -> out.equals(null));
 
     }
@@ -270,8 +275,8 @@ public class IntegerListImplTest {
         out.add(INTEGER_2);
         out.add(INTEGER_3);
         out.add(INTEGER_4);
-        out.add(INTEGER_5);
-        assertEquals(5, out.size());
+
+        assertEquals(4, out.size());
     }
 
     @Test
@@ -299,5 +304,6 @@ public class IntegerListImplTest {
         assertArrayEquals(INTEGERS_ARRAY, out.toArray());
     }
 }
+
 
 
