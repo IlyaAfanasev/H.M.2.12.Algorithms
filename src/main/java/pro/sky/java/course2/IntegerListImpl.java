@@ -8,12 +8,12 @@ import pro.sky.java.course2.exceptions.ItemIsNullException;
 import java.util.Arrays;
 
 public class IntegerListImpl implements IntegerList {
-    private final Integer[] integers;
+    private Integer[] integers;
 
     private int size;
 
     public IntegerListImpl() {
-        integers =new Integer[5];
+        integers =new Integer[4];
     }
 
     public IntegerListImpl(int initSize) {
@@ -97,23 +97,23 @@ public class IntegerListImpl implements IntegerList {
     @Override
     public int indexOf(Integer item) {
         checkItem(item);
-        sortInsertion();
-            int min = 0;
-            int max = size - 1;
+        mergeSort(toArray());
+        int min = 0;
+        int max = size - 1;
 
-            while (min <= max) {
-                int mid = (min + max) / 2;
+        while (min <= max) {
+            int mid = (min + max) / 2;
 
-                if (item.equals(integers[mid])) {
-                    return mid;
-                }
-
-                if (item < integers[mid]) {
-                    max = mid - 1;
-                } else {
-                    min = mid + 1;
-                }
+            if (item.equals(integers[mid])) {
+                return mid;
             }
+
+            if (item < integers[mid]) {
+                max = mid - 1;
+            } else {
+                min = mid + 1;
+            }
+        }
 
         return -1;
     }
@@ -180,6 +180,48 @@ public class IntegerListImpl implements IntegerList {
 
     }
 
+    private void mergeSort(Integer[] arr) {
+        if (arr.length < 2) {
+            return;
+        }
+        int mid = arr.length / 2;
+        Integer[] left = new Integer[mid];
+        Integer[] right = new Integer[arr.length - mid];
+
+        for (int i = 0; i < left.length; i++) {
+            left[i] = arr[i];
+        }
+
+        for (int i = 0; i < right.length; i++) {
+            right[i] = arr[mid + i];
+        }
+
+        mergeSort(left);
+        mergeSort(right);
+
+        merge(arr, left, right);
+    }
+
+    private void merge(Integer[] arr, Integer[] left, Integer[] right) {
+
+        int mainP = 0;
+        int leftP = 0;
+        int rightP = 0;
+        while (leftP < left.length && rightP < right.length) {
+            if (left[leftP] <= right[rightP]) {
+                arr[mainP++] = left[leftP++];
+            } else {
+                arr[mainP++] = right[rightP++];
+            }
+        }
+        while (leftP < left.length) {
+            arr[mainP++] = left[leftP++];
+        }
+        while (rightP < right.length) {
+            arr[mainP++] = right[rightP++];
+        }
+    }
+
     private void checkItem(Integer item) {
         if (item == null) {
             throw new ItemIsNullException();
@@ -188,7 +230,7 @@ public class IntegerListImpl implements IntegerList {
 
     private void checkSize() {
         if (size == integers.length) {
-            throw new ArrayIsFullException();
+            grow();
         }
     }
 
@@ -197,4 +239,9 @@ public class IntegerListImpl implements IntegerList {
             throw new InvalidIndexException();
         }
     }
+    private void grow() {
+        integers = Arrays.copyOf(integers, ((int)(integers.length * 1.5)));
+
+    }
 }
+

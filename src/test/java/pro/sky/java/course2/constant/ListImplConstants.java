@@ -24,7 +24,7 @@ public class ListImplConstants {
     public static final Integer INTEGER_5 = 5;
 
     public static final IntegerListImpl OTHER_INTEGER_LIST =
-            new IntegerListImpl(INTEGER_1, INTEGER_2, INTEGER_3, INTEGER_4, INTEGER_5);
+            new IntegerListImpl(INTEGER_1, INTEGER_2, INTEGER_3, INTEGER_4);
 
     public static final Integer[] INTEGERS_ARRAY = new Integer[]{INTEGER_1, INTEGER_2, INTEGER_3, INTEGER_4};
 }
